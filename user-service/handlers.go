@@ -50,9 +50,17 @@ func RegisterUser(c *gin.Context) {
 
 	users[user.ID] = user
 
+	// Generate JWT token
+	token, err := GenerateJWT(user.ID, user.Username)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		return
+	}
+
 	c.JSON(http.StatusCreated, gin.H{
 		"message": "User registered successfully",
 		"userId":  user.ID,
+		"token":   token,
 	})
 }
 
@@ -92,9 +100,41 @@ func LoginUser(c *gin.Context) {
 		return
 	}
 
+	// Generate JWT token
+	token, err := GenerateJWT(foundUser.ID, foundUser.Username)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate token"})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Login successful",
 		"userId":  foundUser.ID,
-		// In a real app, you would return a JWT token here
+		"token":   token,
+	})
+}
+
+// GetUserProfile handles retrieving user profile information
+func GetUserProfile(c *gin.Context) {
+	// Get user ID from JWT claims (set by AuthMiddleware)
+	userID, exists := c.Get("userID")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "User not authenticated"})
+		return
+	}
+
+	usersMutex.RLock()
+	defer usersMutex.RUnlock()
+
+	// Find user by ID
+	user, exists := users[userID.(string)]
+	if !exists {
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"id":       user.ID,
+		"username": user.Username,
 	})
 }
