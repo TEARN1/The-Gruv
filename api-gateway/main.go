@@ -32,6 +32,7 @@ func main() {
 	// Service URLs from within the Docker network
 	userServiceURL := "http://user-service:8081"
 	collaborationServiceURL := "http://collaboration-service:8083"
+	commentServiceURL := "http://comment-service:8082"
 
 	// Health check for the gateway itself
 	router.GET("/health", func(c *gin.Context) {
@@ -51,6 +52,12 @@ func main() {
 	collaborationGroup := router.Group("/api/collaboration")
 	{
 		collaborationGroup.Any("/*proxyPath", reverseProxy(collaborationServiceURL))
+	}
+
+	// Route group for comment service
+	commentGroup := router.Group("/api/comments")
+	{
+		commentGroup.Any("/*proxyPath", reverseProxy(commentServiceURL))
 	}
 
 	// The real-time service will be handled separately due to WebSockets
