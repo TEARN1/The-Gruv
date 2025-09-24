@@ -1,12 +1,21 @@
 package main
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"golang.org/x/crypto/bcrypt"
+)
 
 // User represents a user in the system.
 type User struct {
-	ID       string `json:"id"`
-	Username string `json:"username"`
-	Password string `json:"-"` // The '-' tag prevents the password from being sent in JSON responses
+	ID        primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	Name      string             `json:"name" bson:"name"`
+	Email     string             `json:"email" bson:"email"`
+	Password  string             `json:"-" bson:"password"` // The '-' tag prevents the password from being sent in JSON responses
+	Gender    string             `json:"gender" bson:"gender"`
+	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
+	UpdatedAt time.Time          `json:"updatedAt" bson:"updatedAt"`
 }
 
 // HashPassword hashes the user's password using bcrypt.

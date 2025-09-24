@@ -9,6 +9,12 @@ import (
 )
 
 func main() {
+	// Initialize database connection
+	if err := InitDatabase(); err != nil {
+		log.Fatalf("Failed to connect to database: %v", err)
+	}
+	defer CloseDatabase()
+
 	// Initialize Gin router
 	router := gin.Default()
 
@@ -19,6 +25,14 @@ func main() {
 			"status":  "UP",
 		})
 	})
+
+	// Authentication routes
+	authGroup := router.Group("/auth")
+	{
+		authGroup.POST("/signup", SignupUser)
+		authGroup.POST("/login", LoginUser)
+		authGroup.GET("/profile", AuthMiddleware(), GetProfile)
+	}
 
 	// Start the server
 	port := "8081" // Different port from the API Gateway
