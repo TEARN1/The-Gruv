@@ -4,9 +4,13 @@ import "golang.org/x/crypto/bcrypt"
 
 // User represents a user in the system.
 type User struct {
-	ID       string `json:"id"`
-	Username string `json:"username"`
-	Password string `json:"-"` // The '-' tag prevents the password from being sent in JSON responses
+	ID        string `json:"id"`
+	Username  string `json:"username"`
+	Password  string `json:"-"` // The '-' tag prevents the password from being sent in JSON responses
+	Gender    string `json:"gender,omitempty"`
+	Email     string `json:"email,omitempty"`
+	Bio       string `json:"bio,omitempty"`
+	AvatarURL string `json:"avatarUrl,omitempty"`
 }
 
 // HashPassword hashes the user's password using bcrypt.
