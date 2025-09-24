@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.title}}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">The Gruv</h1>
+            <nav class="nav">
+                <a href="#" class="nav-link">Events</a>
+                <a href="#" class="nav-link">My Events</a>
+                <a href="#" class="nav-link">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="events-section">
+                <div class="section-header">
+                    <h2>Events</h2>
+                    <button id="addEventBtn" class="add-event-btn" title="Add New Event">
+                        <i class="fas fa-plus"></i>
+                        Add Event
+                    </button>
+                </div>
+                <div id="eventsList" class="events-grid">
+                    <!-- Events will be loaded here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Add Event Modal -->
+    <div id="addEventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Event</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="eventForm" class="event-form">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="eventTitle">Event Title *</label>
+                        <input type="text" id="eventTitle" name="title" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startTime">Start Date & Time *</label>
+                        <input type="datetime-local" id="startTime" name="start_time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endTime">End Date & Time *</label>
+                        <input type="datetime-local" id="endTime" name="end_time" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="eventDescription">Event Description</label>
+                        <textarea id="eventDescription" name="description" rows="4" placeholder="Describe your event..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="locationType">Location Type</label>
+                        <select id="locationType" name="location_type">
+                            <option value="physical">Physical Location</option>
+                            <option value="online">Online Event</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventCategory">Category</label>
+                        <select id="eventCategory" name="category">
+                            <option value="workshop">Workshop</option>
+                            <option value="party">Party</option>
+                            <option value="networking">Networking</option>
+                            <option value="conference">Conference</option>
+                            <option value="meetup">Meetup</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width" id="locationGroup">
+                        <label for="locationInput" id="locationLabel">Address</label>
+                        <input type="text" id="locationInput" name="location" placeholder="Enter event address">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventImage">Event Image URL</label>
+                        <input type="url" id="eventImage" name="image_url" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rsvpEnabled" name="rsvp_enabled">
+                            <span class="checkmark"></span>
+                            Enable RSVP
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
