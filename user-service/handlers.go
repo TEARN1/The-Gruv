@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
@@ -39,8 +40,9 @@ func RegisterUser(c *gin.Context) {
 	}
 
 	user := User{
-		ID:       uuid.New().String(),
-		Username: newUser.Username,
+		ID:        uuid.New().String(),
+		Username:  newUser.Username,
+		CreatedAt: time.Now(),
 	}
 
 	if err := user.HashPassword(newUser.Password); err != nil {

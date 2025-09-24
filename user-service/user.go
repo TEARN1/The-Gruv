@@ -1,12 +1,16 @@
 package main
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	"time"
+	"golang.org/x/crypto/bcrypt"
+)
 
 // User represents a user in the system.
 type User struct {
-	ID       string `json:"id"`
-	Username string `json:"username"`
-	Password string `json:"-"` // The '-' tag prevents the password from being sent in JSON responses
+	ID        string    `json:"id"`
+	Username  string    `json:"username"`
+	Password  string    `json:"-"` // The '-' tag prevents the password from being sent in JSON responses
+	CreatedAt time.Time `json:"createdAt"`
 }
 
 // HashPassword hashes the user's password using bcrypt.
