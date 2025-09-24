@@ -1,0 +1,25 @@
+{
+  "name": "the-gruv-frontend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["react", "vite", "the-gruv", "frontend"],
+  "author": "",
+  "license": "ISC",
+  "description": "Frontend application for The Gruv platform",
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.3",
+    "axios": "^1.12.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.1",
+    "styled-components": "^6.1.19",
+    "vite": "^7.1.7"
+  }
+}

@@ -22,16 +22,24 @@ func reverseProxy(target string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Update the request host to the target's host
 		c.Request.Host = targetURL.Host
+		// Remove the API prefix from the path for the backend service
+		originalPath := c.Request.URL.Path
+		// For /api/users/* requests, remove /api/users prefix
+		if len(originalPath) > 10 && originalPath[:10] == "/api/users" {
+			c.Request.URL.Path = originalPath[10:] // Remove "/api/users"
+		}
 		proxy.ServeHTTP(c.Writer, c.Request)
+		// Restore original path
+		c.Request.URL.Path = originalPath
 	}
 }
 
 func main() {
 	router := gin.Default()
 
-	// Service URLs from within the Docker network
-	userServiceURL := "http://user-service:8081"
-	collaborationServiceURL := "http://collaboration-service:8083"
+	// Service URLs (local development)
+	userServiceURL := "http://localhost:8081"
+	collaborationServiceURL := "http://localhost:8083"
 
 	// Health check for the gateway itself
 	router.GET("/health", func(c *gin.Context) {
