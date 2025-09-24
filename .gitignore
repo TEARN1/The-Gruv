@@ -1,0 +1,23 @@
+# Binaries
+user-service/user-service
+api-gateway/api-gateway
+*/bin/
+*/build/
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+/tmp/test_*

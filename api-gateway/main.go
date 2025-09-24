@@ -47,6 +47,12 @@ func main() {
 		userGroup.Any("/*proxyPath", reverseProxy(userServiceURL))
 	}
 
+	// Route group for authentication (also routes to user service)
+	authGroup := router.Group("/auth")
+	{
+		authGroup.Any("/*proxyPath", reverseProxy(userServiceURL))
+	}
+
 	// Route group for collaboration service
 	collaborationGroup := router.Group("/api/collaboration")
 	{
