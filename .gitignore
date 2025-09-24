@@ -1,0 +1,15 @@
+# Go build artifacts
+user-service/user-service
+api-gateway/api-gateway
+
+# Go module cache and temporary files
+*.tmp
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

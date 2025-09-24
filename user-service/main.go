@@ -20,6 +20,20 @@ func main() {
 		})
 	})
 
+	// Public routes (no authentication required)
+	public := router.Group("/")
+	{
+		public.POST("/register", RegisterUser)
+		public.POST("/login", LoginUser)
+	}
+
+	// Protected routes (authentication required)
+	protected := router.Group("/")
+	protected.Use(AuthMiddleware())
+	{
+		protected.GET("/profile", GetUserProfile)
+	}
+
 	// Start the server
 	port := "8081" // Different port from the API Gateway
 	fmt.Printf("User Service listening on port %s\n", port)
