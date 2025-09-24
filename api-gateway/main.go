@@ -31,6 +31,7 @@ func main() {
 
 	// Service URLs from within the Docker network
 	userServiceURL := "http://user-service:8081"
+	eventServiceURL := "http://event-service:8082"
 	collaborationServiceURL := "http://collaboration-service:8083"
 
 	// Health check for the gateway itself
@@ -45,6 +46,12 @@ func main() {
 	userGroup := router.Group("/api/users")
 	{
 		userGroup.Any("/*proxyPath", reverseProxy(userServiceURL))
+	}
+
+	// Route group for event service
+	eventGroup := router.Group("/api/events")
+	{
+		eventGroup.Any("/*proxyPath", reverseProxy(eventServiceURL))
 	}
 
 	// Route group for collaboration service
