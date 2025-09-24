@@ -20,6 +20,13 @@ func main() {
 		})
 	})
 
+	// User routes
+	api := router.Group("/api/users")
+	{
+		api.POST("/register", RegisterUser)
+		api.POST("/login", LoginUser)
+	}
+
 	// Start the server
 	port := "8081" // Different port from the API Gateway
 	fmt.Printf("User Service listening on port %s\n", port)

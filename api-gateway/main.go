@@ -30,8 +30,9 @@ func main() {
 	router := gin.Default()
 
 	// Service URLs from within the Docker network
-	userServiceURL := "http://user-service:8081"
-	collaborationServiceURL := "http://collaboration-service:8083"
+	userServiceURL := "http://localhost:8081"
+	eventServiceURL := "http://localhost:8082"
+	collaborationServiceURL := "http://localhost:8083"
 
 	// Health check for the gateway itself
 	router.GET("/health", func(c *gin.Context) {
@@ -44,7 +45,19 @@ func main() {
 	// Route group for user service
 	userGroup := router.Group("/api/users")
 	{
+		// Handle the root path explicitly
+		userGroup.GET("", reverseProxy(userServiceURL))
+		userGroup.POST("", reverseProxy(userServiceURL))
 		userGroup.Any("/*proxyPath", reverseProxy(userServiceURL))
+	}
+
+	// Route group for event service
+	eventGroup := router.Group("/api/events")
+	{
+		// Handle the root path explicitly 
+		eventGroup.GET("", reverseProxy(eventServiceURL))
+		eventGroup.POST("", reverseProxy(eventServiceURL))
+		eventGroup.Any("/*proxyPath", reverseProxy(eventServiceURL))
 	}
 
 	// Route group for collaboration service
