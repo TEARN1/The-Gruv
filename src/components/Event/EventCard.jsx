@@ -20,7 +20,7 @@ export default function EventCard({ event }) {
   };
 
   return (
-    <div className="card" onClick={() => nav(`/event/${event.id}`)}>
+    <div className="card" onClick={() => nav(`/event/${event.id}`)} role="button" tabIndex={0} aria-label={`Open event ${event.title}`}> 
       <div className="card-header">
         <strong>{event.author?.name || 'Unknown'}</strong>
         <span>{new Date(event.postedAt || Date.now()).toLocaleString()}</span>
@@ -28,14 +28,14 @@ export default function EventCard({ event }) {
       <h3 className="title">{event.title}</h3>
       <p className="muted">{event.description}</p>
       <div className="card-footer">
-        <button onClick={(e) => { e.stopPropagation(); alert('RSVP (placeholder)'); }}>RSVP</button>
-        <button onClick={(e) => { e.stopPropagation(); alert('Amplify (placeholder)'); }}>Amplify</button>
+        <button aria-label={`RSVP to ${event.title}`} onClick={(e) => { e.stopPropagation(); alert('RSVP (placeholder)'); }}>RSVP</button>
+        <button aria-label={`Amplify ${event.title}`} onClick={(e) => { e.stopPropagation(); alert('Amplify (placeholder)'); }}>Amplify</button>
       </div>
-      <div className="comments" onClick={(e) => e.stopPropagation()}> 
+      <div className="comments" onClick={(e) => e.stopPropagation()}>
         {event.comments?.slice(-3).map(c => <div key={c.id}><b>{c.userName}</b>: {c.text}</div>)}
         <form onSubmit={submit} className="comment-form">
-          <input value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Add a comment..." />
-          <button type="submit" disabled={posting}>{posting ? '...' : 'Send'}</button>
+          <input aria-label="Add a comment" value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Add a comment..." />
+          <button type="submit" disabled={posting} aria-label="Send comment">{posting ? '...' : 'Send'}</button>
         </form>
       </div>
     </div>
