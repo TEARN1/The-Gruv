@@ -1,0 +1,30 @@
+:root {
+  --bg: #0f1724;
+  --panel: #111827;
+  --muted: #9CA3AF;
+  --accent: #7c3aed;
+  --glass: rgba(255,255,255,0.04);
+  color-scheme: dark;
+}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color: #e6eef8;
+}
+.container { max-width: 980px; margin: 28px auto; padding: 0 16px; }
+.centered { height: 80vh; display:flex; align-items:center; justify-content:center; }
+.card { background: var(--panel); border-radius: 12px; padding: 16px; box-shadow: 0 6px 18px rgba(2,6,23,0.6); }
+.card-header { display:flex; justify-content:space-between; font-size:13px; color:var(--muted); }
+.title { margin: 8px 0 12px; }
+.muted { color: var(--muted); }
+.row { display:flex; gap:8px; margin-top:12px; }
+button { background: var(--accent); color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.comment-form { display:flex; gap:8px; margin-top:8px; }
+input { background: var(--glass); border: 1px solid rgba(255,255,255,0.03); color:inherit; padding: 8px 10px; border-radius: 8px; width: 100%; }
+.card-footer { display:flex; gap:8px; margin-top:12px; }
+.comments { margin-top:12px; font-size: 13px; color: var(--muted); max-height: 160px; overflow:auto; }
+.hero img { width: 100%; height: 360px; object-fit: cover; border-radius: 12px; }
+.concierge { display:inline-block; padding:10px 12px; background:var(--panel); border-radius:10px; color:var(--muted); text-decoration:none; }
+.coming-soon { opacity:0.6; }

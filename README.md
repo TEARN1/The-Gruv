@@ -1,25 +1,21 @@
-# The Gruv
+# The Gruv — Frontend (Vite)
 
-Welcome to **The Gruv**, a next-generation, AI-native platform designed for creating low-latency, highly-responsive user experiences and powering high-throughput semantic search.
+This folder contains the Vite-based frontend scaffold for The Gruv.
 
-## About
+Quick start
+1. Copy `.env.example` to `.env` and fill the Firebase + API values.
+2. Install deps:
+   - npm install
+3. Run dev server:
+   - npm run dev
+4. Open http://localhost:3000
 
-This repository contains the source code for all microservices and components that make up The Gruv platform. The architecture is designed to be modular, scalable, and event-driven, allowing for independent development and deployment of each service.
+Notes
+- Backend API: configured via VITE_API_BASE_URL
+- WebSocket (dev): VITE_WS_URL
+- Firebase config must be set in environment variables.
 
-## Architecture Overview
-
-The platform is built on a microservices architecture, with each service communicating asynchronously through a message broker. The key components include:
-
-- **API Gateway**: The single entry point for all client requests.
-- **User Service**: Manages user authentication, profiles, and sessions.
-- **Real-time Service**: Handles WebSocket connections for real-time communication.
-- **Vector Database Service**: Provides an interface for semantic search and vector embeddings.
-- **Content Ingestion Service**: Processes and indexes content for search.
-
-## Getting Started
-
-*(This section will be updated with instructions on how to build, test, and run the project locally.)*
-
----
-
-*This project is being developed with the assistance of GitHub Copilot.*
+Next steps after this scaffold:
+- Split remaining UI pieces into components & polish styles.
+- Add WebSocket hook for real-time updates.
+- Replace placeholder images and wire missing API endpoints.

@@ -1,0 +1,1 @@
+{"name": "the-gruv-frontend","version": "0.1.0","private": true,"scripts": {"dev": "vite","build": "vite build","preview": "vite preview","lint": "eslint . --ext .js,.jsx"},"dependencies": {"react": "^18.2.0","react-dom": "^18.2.0","react-router-dom": "^6.14.1","firebase": "^10.12.0"},"devDependencies": {"vite": "^5.1.0","@vitejs/plugin-react": "^4.0.0","eslint": "^8.41.0"}}
